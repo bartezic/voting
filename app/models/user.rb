@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
   has_many :polls
 
   validates :email, presence: true, email: true
+  
+  protected
+  
+  def confirmation_required?
+    false
+  end
 end
