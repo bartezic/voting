@@ -1,0 +1,7 @@
+.nested-fields.row
+  .col-xs-1
+    = link_to_remove_association f, {} do
+      %button.btn.btn-default
+        %span.glyphicon.glyphicon-remove-sign
+  .col-xs-11
+    = f.input :name, label: false, placeholder: 'Answer...'

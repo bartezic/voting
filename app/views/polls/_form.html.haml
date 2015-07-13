@@ -1,0 +1,18 @@
+.panel.panel-default
+  = simple_form_for(@poll) do |f|
+    = f.error_notification
+
+    .panel-body.form-inputs
+      = f.input :question, label: false, placeholder: 'Question'
+      #options
+        = f.simple_fields_for :options do |option|
+          = render 'option_fields', f: option
+        .links
+          = link_to_add_association f, :options do
+            %button.btn.btn-default
+              %span.glyphicon.glyphicon-plus-sign
+              Add answer
+      = f.input :multi
+      = f.input :public
+    .panel-footer.form-actions
+      = f.button :submit

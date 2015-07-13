@@ -1,0 +1,33 @@
+%h1
+  Polls management
+  .pull-right
+    = link_to new_poll_path, class: 'btn btn-default' do
+      %span.glyphicon.glyphicon-plus-sign
+      New Poll
+  .clearfix
+
+- @polls.each do |poll|
+  .panel.panel-default
+    .panel-heading
+      %h2.panel-title.pull-left= poll.question
+      .pull-right
+        %span.label.label-default Multi: #{poll.multi}
+        %span.label.label-default Public: #{poll.public}
+        %span.label.label-default created by: #{poll.user.name}
+        %span.label.label-default created at: #{l(poll.created_at, format: :full)}
+      .clearfix
+    .panel-body{data:{poll: {id: poll.token}}}
+      = render 'poll', poll: poll
+    .panel-footer
+      .pull-right
+        %button.btn.btn-default{type: :button, title: 'Share poll link', data: {toggle: :popover, content: poll_url(poll.token), placement: :top}}
+          %span.glyphicon.glyphicon-link
+        = link_to 'Edit', edit_poll_path(poll), class: 'btn btn-default'
+        = link_to 'Destroy', poll, class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' }
+      .clearfix
+
+.pull-right
+  = link_to new_poll_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-plus-sign
+    New Poll
+.clearfix

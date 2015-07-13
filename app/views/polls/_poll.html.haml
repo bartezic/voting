@@ -1,0 +1,16 @@
+- if (answers = poll.answers_by(current_user, request.remote_ip)).size > 0
+  - max = poll.answers.count
+  - poll.options.each do |option|
+    - now = option.answers.count
+    = option.name
+    .progress
+      .progress-bar.progress-bar-success.progress-bar-striped{role: :progressbar, 'aria-valuenow': now, 'aria-valuemin': "0", 'aria-valuemax': max, style: "width: #{now.to_f/max.to_f*100.0}%"}
+        #{now} of #{max}
+- else
+  = form_tag(answer_poll_path(poll.token), method: :post, remote: true) do
+    - poll.options.each do |option|
+      %label
+        %input{type: (poll.multi ? :checkbox : :radio), name: "answer[]", value: option.id}
+        = option.name
+      %br
+    = submit_tag 'Vote', class: 'btn btn-xs btn-success'

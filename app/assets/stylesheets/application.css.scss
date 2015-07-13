@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+
+html.turbolinks-progress-bar::before {
+  background-color: red !important;
+  height: 3px !important;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  background-color: #eee;
+}
+.wrap {
+  width: 100%;
+  margin-top: 51px; // accommodate the navbar
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.footer {
+  .text-center {
+    padding: 20px;
+  }
+}

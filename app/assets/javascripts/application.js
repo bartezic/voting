@@ -14,4 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require cocoon
 //= require_tree .
+
+
+
+$(document).on("ready page:load", function(){
+  Turbolinks.enableProgressBar();
+  $('[data-toggle="popover"]').popover();
+})

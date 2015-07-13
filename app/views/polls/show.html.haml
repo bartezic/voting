@@ -1,0 +1,10 @@
+%h1 Poll
+
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title.pull-left= @poll.question
+    .pull-right
+      %span.label.label-default created by: #{@poll.user.name}
+    .clearfix
+  .panel-body{data:{poll: {id: @poll.token}}}
+    = render 'poll', poll: @poll

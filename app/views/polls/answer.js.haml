@@ -1,0 +1,1 @@
+$(".panel-body[data-poll-id=#{@poll.token}]").html("#{escape_javascript(render 'poll', poll: @poll)}");
