@@ -1,0 +1,29 @@
+set :faye_user, fetch(:deploy_user)
+set :faye_pid, -> { "#{shared_path}/tmp/pids/faye.pid" }
+
+namespace :faye do
+  desc "Setup Faye initializer"
+  task :setup do
+    on roles :all do
+      template "faye_init", "/tmp/faye_init"
+      system "touch #{fetch(:faye_pid)}"
+      sudo "chmod +x /tmp/faye_init"
+      sudo "mv /tmp/faye_init /etc/init.d/faye_#{fetch(:application)}"
+      sudo "update-rc.d -f faye_#{fetch(:application)} defaults"
+    end
+  end
+
+  # uncomment for first time deploy
+  after "deploy:finishing", "faye:setup"
+
+  %w[start stop restart].each do |command|
+    desc "#{command} faye"
+    task command do
+      on roles :all do
+        sudo "service faye_#{fetch(:application)} #{command}"
+      end
+    end
+    
+  end
+  after "faye:setup", "faye:restart"
+end

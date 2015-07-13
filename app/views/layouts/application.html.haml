@@ -5,6 +5,9 @@
     %title= content_for?(:title) ? yield(:title) : 'Voting'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Voting'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    :javascript
+      window.fayeHost = '#{FAYE_HOST}'
+    %script{src: "//#{FAYE_HOST}/faye.js"}
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body

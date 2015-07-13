@@ -1,6 +1,14 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require "net/http"
+
+FAYE_HOST = case Rails.env
+  when 'production'
+    '46.101.247.28'
+  else
+    'localhost:9292'
+  end
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
